@@ -90,7 +90,7 @@ public class OpLinearMode extends LinearOpMode {
         leftBackDrive  = hardwareMap.get(DcMotor.class, "lbd");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
         rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
-        linear = hardwareMap.get(DcMotor.class, "linear");
+        linear = hardwareMap.get(DcMotorEx.class, "linear");
         claw = hardwareMap.servo.get("servo");
 
 
