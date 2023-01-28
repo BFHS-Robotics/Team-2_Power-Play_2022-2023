@@ -82,7 +82,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AVF4wiL/////AAABmSijSoO1NEbim9pwI1GVJTJ3KJcKXsWGLc0IWiiXtxMael7hTtX3WArTINrm3Dxfm7sNjPXdF57mr3KjU9euLnoA5YI/e+HT8GezcN0ga96Fp+xCykoSbntgMf0HHcydny6YYHPhS6TlNoEg3lZwPDf+tumZ7sv+TShC+epyVoBpHlvmck6efaBsxUzFvlncebJ9kEyTIDwxTys3hpk8xQtvdvmlmGWt6vjZoY1Fq8ddTYoeItUq3Icts/4PcuDD3D6mmIXCPDXc7COdqpp2/MlvnRtmOeRPSppwcGrl4p04bLOe1aZi533fEn4uUjYcnD5LtXuavafbL2smuVFh22EOpsSPaYQob//6WO76M6GJ";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
@@ -116,7 +116,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(1.0, 16.0/9.0);
+            tfod.setZoom(1.0,16.0/12.0);
         }
 
         /** Wait for the game to begin */
