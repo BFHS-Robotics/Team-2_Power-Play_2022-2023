@@ -83,8 +83,11 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
             "shamrock"
     };
 
+    /** robot */
     private static final String LABEL_ONE = LABELS[0];
+    /** school */
     private static final String LABEL_TWO = LABELS[1];
+    /** shamrock */
     private static final String LABEL_THREE = LABELS[2];
 
     /*
@@ -154,6 +157,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
+        runtime.reset();
 
         if (!isStarted()) {
                 if (tfod != null) {
@@ -178,6 +182,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                                 telemetry.addData("Image","ROBOT");
                             } else if (recognition.getLabel().equals(LABEL_TWO)) {
                                 telemetry.addData("Image","SCHOOL");
+                                goForward(10);
                             } else if (recognition.getLabel().equals(LABEL_THREE)) {
                                 telemetry.addData("Image","SHAMROCK");
                             } else {
@@ -223,4 +228,22 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
         // tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
     }
+
+    public void goForward(int time){
+        rightFrontDrive.setPower(0.75);
+        leftFrontDrive.setPower(0.75);
+        rightBackDrive.setPower(0.75);
+        leftBackDrive.setPower(0.75);
+        wait(runtime.milliseconds(), time);
+        rightFrontDrive.setPower(0);
+        leftFrontDrive.setPower(0);
+        rightBackDrive.setPower(0);
+        leftBackDrive.setPower(0);
+    }
+    public void wait(double milliseconds, double wait){
+        while(runtime.milliseconds() < milliseconds + wait && opModeIsActive()){
+        }
+
+    }
+
 }
