@@ -67,10 +67,10 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontDrive = null;
-    private DcMotor leftBackDrive = null;
-    private DcMotor rightFrontDrive = null;
-    private DcMotor rightBackDrive = null;
+    private DcMotorEx leftFrontDrive = null;
+    private DcMotorEx leftBackDrive = null;
+    private DcMotorEx rightFrontDrive = null;
+    private DcMotorEx rightBackDrive = null;
     private DcMotorEx linear = null;
     private Servo claw = null;
     private BNO055IMU imu = null;      // Control/Expansion Hub IMU
@@ -176,10 +176,10 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "lfd");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "lbd");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rfd");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "rbd");
+        leftFrontDrive  = hardwareMap.get(DcMotorEx.class, "lfd");
+        leftBackDrive  = hardwareMap.get(DcMotorEx.class, "lbd");
+        rightFrontDrive = hardwareMap.get(DcMotorEx.class, "rfd");
+        rightBackDrive = hardwareMap.get(DcMotorEx.class, "rbd");
         linear = hardwareMap.get(DcMotorEx.class, "linear");
         claw = hardwareMap.servo.get("servo");
 
