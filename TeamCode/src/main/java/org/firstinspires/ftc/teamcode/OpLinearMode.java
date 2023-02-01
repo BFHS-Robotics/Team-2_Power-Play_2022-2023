@@ -78,7 +78,7 @@ public class OpLinearMode extends LinearOpMode {
     private DcMotor leftBackDrive = null;
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
-    private DcMotor linear = null;
+    private DcMotorEx linear = null;
     private Servo claw = null;
 
     @Override
