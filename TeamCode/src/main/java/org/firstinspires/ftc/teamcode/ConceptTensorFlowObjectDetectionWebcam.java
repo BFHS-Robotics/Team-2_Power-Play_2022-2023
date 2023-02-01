@@ -157,9 +157,10 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
-        runtime.reset();
+        //runtime.reset();
 
-        if (!isStarted()) {
+        if ((opModeIsActive())) {
+            while (opModeIsActive()) {
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -169,22 +170,22 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                         // step through the list of recognitions and display image position/size information for each one
                         // Note: "Image number" refers to the randomized image orientation/number
                         for (Recognition recognition : updatedRecognitions) {
-                            double col = (recognition.getLeft() + recognition.getRight()) / 2 ;
-                            double row = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-                            double width  = Math.abs(recognition.getRight() - recognition.getLeft()) ;
-                            double height = Math.abs(recognition.getTop()  - recognition.getBottom()) ;
+                            double col = (recognition.getLeft() + recognition.getRight()) / 2;
+                            double row = (recognition.getTop() + recognition.getBottom()) / 2;
+                            double width = Math.abs(recognition.getRight() - recognition.getLeft());
+                            double height = Math.abs(recognition.getTop() - recognition.getBottom());
 
-                            telemetry.addData(""," ");
-                            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100 );
-                            telemetry.addData("- Position (Row/Col)","%.0f / %.0f", row, col);
-                            telemetry.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
+                            telemetry.addData("", " ");
+                            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
+                            telemetry.addData("- Position (Row/Col)", "%.0f / %.0f", row, col);
+                            telemetry.addData("- Size (Width/Height)", "%.0f / %.0f", width, height);
                             if (recognition.getLabel().equals(LABEL_ONE)) {
-                                telemetry.addData("Image","ROBOT");
+                                telemetry.addData("Image", "ROBOT");
                             } else if (recognition.getLabel().equals(LABEL_TWO)) {
-                                telemetry.addData("Image","SCHOOL");
+                                telemetry.addData("Image", "SCHOOL");
                                 goForward(10);
                             } else if (recognition.getLabel().equals(LABEL_THREE)) {
-                                telemetry.addData("Image","SHAMROCK");
+                                telemetry.addData("Image", "SHAMROCK");
                             } else {
                                 // if something goes wrong
                             }
@@ -192,6 +193,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                         telemetry.update();
                     }
                 }
+            }
         }
     }
 
