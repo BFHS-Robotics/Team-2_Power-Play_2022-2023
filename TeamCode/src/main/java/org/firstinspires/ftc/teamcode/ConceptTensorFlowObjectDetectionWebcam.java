@@ -233,7 +233,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
-        //runtime.reset();
+        runtime.reset();
 
         if ((opModeIsActive())) {
             while (opModeIsActive()) {
@@ -257,13 +257,19 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                             telemetry.addData("- Size (Width/Height)", "%.0f / %.0f", width, height);
                             if (recognition.getLabel().equals(LABEL_ONE)) {
                                 telemetry.addData("Image", "ROBOT");
+                                telemetry.update();
                                 strafeLeft(DRIVE_SPEED,2);
                             } else if (recognition.getLabel().equals(LABEL_TWO)) {
                                 telemetry.addData("Image", "SCHOOL");
-                                goForward(10);
+                                telemetry.update();
+                                strafeRight(DRIVE_SPEED,4);
+                                driveStraight(DRIVE_SPEED,30,0);
                             } else if (recognition.getLabel().equals(LABEL_THREE)) {
                                 telemetry.addData("Image", "SHAMROCK");
-                                strafeLeft(DRIVE_SPEED,2);
+                                telemetry.update();
+                                strafeRight(DRIVE_SPEED,12);
+                                driveStraight(DRIVE_SPEED,30,0);
+                                //goForward(3);
                             } else {
                                 // if something goes wrong
                             }
@@ -476,7 +482,9 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
     }
 
     public double getRawHeading() {
-        Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        // orientation here???
+        // XYZ| XZY | ZYX | ZXY
+        Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XZY, AngleUnit.DEGREES);
         return angles.firstAngle;
     }
 

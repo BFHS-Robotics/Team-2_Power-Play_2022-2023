@@ -158,13 +158,13 @@ public class Autonomous_left extends LinearOpMode {
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        leftFrontDrive  = hardwareMap.get(DcMotorEx.class, "fl");
-        leftBackDrive  = hardwareMap.get(DcMotorEx.class, "bl");
-        rightFrontDrive = hardwareMap.get(DcMotorEx.class, "fr");
-        rightBackDrive = hardwareMap.get(DcMotorEx.class, "br");
-        slide = hardwareMap.get(DcMotorEx.class, "slide");
-        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
-        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        leftFrontDrive  = hardwareMap.get(DcMotorEx.class, "lfd");
+        leftBackDrive  = hardwareMap.get(DcMotorEx.class, "lbd");
+        rightFrontDrive = hardwareMap.get(DcMotorEx.class, "rfd");
+        rightBackDrive = hardwareMap.get(DcMotorEx.class, "rbd");
+        slide = hardwareMap.get(DcMotorEx.class, "linear");
+        rightClaw = hardwareMap.get(Servo.class, "servo");
+        //leftClaw = hardwareMap.get(Servo.class, "leftClaw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
@@ -293,17 +293,17 @@ public class Autonomous_left extends LinearOpMode {
 
     public void closeClaw(double milliseconds){
         rightClaw.setPosition(0.25);
-        leftClaw.setPosition(0.75);
+        //leftClaw.setPosition(0.75);
         wait(milliseconds, 1250);
     }
     public void openClaw(double milliseconds){
         rightClaw.setPosition(1.0);
-        leftClaw.setPosition(0.0);
+        //leftClaw.setPosition(0.0);
         wait(milliseconds, 1250);
     }
     public void centerClaw(double milliseconds){
         rightClaw.setPosition(0.5);
-        leftClaw.setPosition(0.5);
+        //leftClaw.setPosition(0.5);
         wait(milliseconds, 1000);
     }
     public void wait(double milliseconds, double wait){

@@ -181,7 +181,7 @@ public class OpLinearMode extends LinearOpMode {
 
 
 
-            if (gamepad2.right_bumper) {
+            if (gamepad2.right_bumper && Math.abs(linear.getCurrentPosition()) < 12000) {
                 linear.setPower(.5);
             } else if (gamepad2.left_bumper) {
                 linear.setPower(-.5);
