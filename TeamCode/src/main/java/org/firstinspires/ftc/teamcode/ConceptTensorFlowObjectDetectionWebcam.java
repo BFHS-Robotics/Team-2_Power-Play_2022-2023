@@ -210,6 +210,18 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         linear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
+
+        // Wait for the game to start; close claw
+        /*boolean run = true;
+        while (opModeInInit()) {
+            //telemetry.addData(">", "Robot Heading = %4.0f", getRawHeading());
+            //telemetry.update();
+            if(run){
+                run = false;
+                closeClaw(runtime.milliseconds());
+            }
+        }/**/
+
         initVuforia();
         initTfod();
 
@@ -229,12 +241,22 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
             tfod.setZoom(1.0,16.0/12.0);
         }
 
+
+        // Set the encoders for closed loop speed control, and reset the heading.
+        leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        resetHeading();
+
         /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
         runtime.reset();
 
+        //closeClaw(runtime.milliseconds());
         if ((opModeIsActive())) {
             while (opModeIsActive()) {
                 if (tfod != null) {
@@ -258,7 +280,8 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                             if (recognition.getLabel().equals(LABEL_ONE)) {
                                 telemetry.addData("Image", "ROBOT");
                                 telemetry.update();
-                                strafeLeft(DRIVE_SPEED,2);
+                                strafeLeft(DRIVE_SPEED,16);
+                                driveStraight(DRIVE_SPEED,30,0);
                             } else if (recognition.getLabel().equals(LABEL_TWO)) {
                                 telemetry.addData("Image", "SCHOOL");
                                 telemetry.update();
@@ -267,7 +290,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                             } else if (recognition.getLabel().equals(LABEL_THREE)) {
                                 telemetry.addData("Image", "SHAMROCK");
                                 telemetry.update();
-                                strafeRight(DRIVE_SPEED,12);
+                                strafeRight(DRIVE_SPEED,24);
                                 driveStraight(DRIVE_SPEED,30,0);
                                 //goForward(3);
                             } else {
@@ -484,7 +507,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
     public double getRawHeading() {
         // orientation here???
         // XYZ| XZY | ZYX | ZXY
-        Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XZY, AngleUnit.DEGREES);
+        Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
         return angles.firstAngle;
     }
 
@@ -503,6 +526,23 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
         telemetry.addData("Error:Steer",  "%5.1f:%5.1f", headingError, turnSpeed);
         telemetry.addData("Wheel Speeds L:R.", "%5.2f : %5.2f", leftSpeed, rightSpeed);
         telemetry.update();
+    }
+
+    /**
+     * Reset the "offset" heading back to zero
+     */
+    public void resetHeading() {
+        // Save a new heading offset equal to the current raw heading.
+        headingOffset = getRawHeading();
+        robotHeading = 0;
+    }
+    public void closeClaw(double milliseconds){
+        claw.setPosition(0.0);
+        wait(milliseconds, 1250);
+    }
+    public void openClaw(double milliseconds){
+        claw.setPosition(1.0);
+        wait(milliseconds, 1250);
     }
 
 }
