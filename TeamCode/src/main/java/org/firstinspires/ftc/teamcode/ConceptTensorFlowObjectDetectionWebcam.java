@@ -63,7 +63,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name = "Concept: TensorFlow Object Detection Webcam", group = "Concept")
+@Autonomous(name = "Team 2 Camera Auto", group = "Concept")
 public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -295,6 +295,10 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                                 //goForward(3);
                             } else {
                                 // if something goes wrong
+                                //telemetry.addData("Image", "DETECTION PROBLEM");
+                                //telemetry.update();
+                                //strafeLeft(DRIVE_SPEED,16);
+                                //driveStraight(DRIVE_SPEED,30,0);
                             }
                         }
                         telemetry.update();

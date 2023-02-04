@@ -32,12 +32,11 @@ package org.firstinspires.ftc.teamcode;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -68,9 +67,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Team 2: 2 Player", group="Linear Opmode")
+@TeleOp(name="Team 2: 1 Player", group="Linear Opmode")
 
-public class OpLinearMode extends LinearOpMode {
+public class OpLinearMode1Player extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -181,17 +180,17 @@ public class OpLinearMode extends LinearOpMode {
 
 
 
-            if (gamepad2.right_bumper && Math.abs(linear.getCurrentPosition()) < 12000) {
+            if (gamepad1.right_bumper && Math.abs(linear.getCurrentPosition()) < 12000) {
                 linear.setPower(.5);
-            } else if (gamepad2.left_bumper && Math.abs(linear.getCurrentPosition()) > 0) {
+            } else if (gamepad1.left_bumper && Math.abs(linear.getCurrentPosition()) > 0) {
                 linear.setPower(-.5);
             } else {
                 linear.setPower(0);
             }
 
-            if (gamepad2.a){
+            if (gamepad1.a){
                 claw.setPosition(1);
-            } else if (gamepad2.b){
+            } else if (gamepad1.b){
                 claw.setPosition(0);
             }
         }
